@@ -35,5 +35,5 @@
 bin/**
 common/**
 .vs/**
-skeleton/debug/**
+#skeleton/debug/*
 /skeleton/.vs/game/v16
