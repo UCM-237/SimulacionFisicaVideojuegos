@@ -34,3 +34,4 @@
 #Any directory
 bin/**
 common/**
+.vs/**
