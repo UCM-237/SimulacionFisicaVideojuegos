@@ -35,5 +35,9 @@
 bin/**
 common/**
 .vs/**
+.vs/game/FileContentIndex**
 skeleton/debug/**
-/skeleton/.vs/game/v16
+/skeleton/.vs/game/**
+
+# Zip files
+*.zip

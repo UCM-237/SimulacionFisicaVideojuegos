@@ -3,8 +3,6 @@ Repositorio de las prácticas de la asignatura de Simulación Física de Videoju
 
 En la carpeta skeleton estará vuestro código fuente
 
-Necesitaréis además dos carpetas que podreis descargar de los siguientes enlaces:
+Necesitaréis además descomprimir el archivo que se indica a continuación en la raíz del repositorio:
 
-Carpeta bin https://ucomplutense-my.sharepoint.com/:f:/g/personal/liagar05_ucm_es/EtlUeePyBkhOgwMsCXi6OmAB2xTR0L-SCkLXS1tugHf8Hg?e=REFbg7
-
-Carpeta common que contiene todas las bibliotecas de PhysX 3.4  https://ucomplutense-my.sharepoint.com/:f:/g/personal/liagar05_ucm_es/EuqFDUqgc5lIizuD8XZmATkBmz4fF3XVb9IC49WYOJLN2Q?e=pObPiP
+Carpetas bin y common https://ucomplutense-my.sharepoint.com/:u:/g/personal/davalejo_ucm_es/EZcsdyIoqTFOrF4hdfkVYk0BJZ9IycJ3QqXQFwaXVrlSKg?e=pfs6IO
