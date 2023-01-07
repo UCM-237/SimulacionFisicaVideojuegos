@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+std::string display_text = "This is a test";
 
 
 using namespace physx;
