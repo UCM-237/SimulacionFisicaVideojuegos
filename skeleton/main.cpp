@@ -10,7 +10,9 @@
 
 #include <iostream>
 
-std::string display_text = "This is a test";
+#include "Particle.h"
+
+std::string display_text = "I like orcas";
 
 
 using namespace physx;
@@ -30,6 +32,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
+Particle* aux;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -54,6 +57,9 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	aux = new Particle(Vector3(0, 0, 0), Vector3(0, 0.02, 0));	
+
 	}
 
 
@@ -66,6 +72,8 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	aux->integrate(t);
 }
 
 // Function to clean data
@@ -84,7 +92,9 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
-	}
+
+	delete aux;
+}
 
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)

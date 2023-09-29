@@ -10,6 +10,7 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -21,6 +22,7 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
