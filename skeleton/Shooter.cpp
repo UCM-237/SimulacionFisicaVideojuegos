@@ -1,8 +1,6 @@
 #include "Shooter.h"
 
-Shooter::Shooter() 
-{
-}
+Shooter::Shooter() {}
 
 Shooter::~Shooter()
 {
@@ -22,34 +20,35 @@ void Shooter::shoot(currentShotType cst)
 {
 	Particle* temp = new Particle();
 	shotParticles.push_back(temp);
+	float m = 0, v = 0;
+	Vector3 a = {0.0f, 0.0f, 0.0f};
 
 	switch (cst)
 	{
 	case PISTOL:
-		temp->setMass(2.0f); // 2.0 Kg
-		temp->setVelocity(GetCamera()->getDir() * 35.0f); // 35 m/s
-		temp->setAcceleration({ 0.0f, -1.0f, 0.0f });
-		temp->setDamping(0.99f);
+		m = 2.0;
+		v =  35.0f;
+		a = { 0.0f, -1.0f, 0.0f };
 		break;
 	case ARTILLERY:
-		temp->setMass(200.0f); // 200.0 Kg
-		temp->setVelocity({ 0.0f, 30.0f, 40.0f });
-		temp->setAcceleration({ 0.0f, -20.0f, 0.0f });
-		temp->setDamping(0.99f);
+		m = 200.0f; // 200.0 Kg
+		v = 40.0f;
+		a ={ 0.0f, -20.0f, 0.0f };
 		break;
 	case FIREBALL:
-		temp->setMass(1.0f); // 1.0 Kg
-		temp->setVelocity({ 0.0f, 0.0f, 10.0f });
-		temp->setAcceleration({ 0.0f, 0.6f, 0.0f }); // floats
-		temp->setDamping(0.9f);
+		m = 1.0f; // 1.0 Kg
+		v = 10.0f;
+		a = { 0.0f, 0.6f, 0.0f }; // floats
 		break;
 	case LASER:
-		temp->setMass(0.1f); // almost no weight
-		temp->setVelocity({ 0.0f, 0.0f, 100.0f }); // No gravity
-		temp->setAcceleration({ 0.0f, 0.0f, 0.0f });
-		temp->setDamping(0.99f);
+		m = 0.1f; // almost no weight
+		v = 100.0f; // No gravity
+		a = { 0.0f, 0.0f, 0.0f };
 		break;
 	}
 
+	temp->setMass(m); // almost no weight
+	temp->setVelocity(GetCamera()->getDir() * v);
+	temp->setAcceleration(a);
 	temp->setPosition(PxTransform(GetCamera()->getEye()));
 }

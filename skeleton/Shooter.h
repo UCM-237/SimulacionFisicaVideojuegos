@@ -3,7 +3,7 @@
 
 #include "Particle.h"
 
-class Shooter : public Particle
+class Shooter 
 {
 	std::vector<Particle*> shotParticles;
 public:
