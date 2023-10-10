@@ -9,10 +9,7 @@ Shooter::~Shooter()
 void Shooter::integrate(double t)
 {
 	for (auto e : shotParticles) {
-		if (e != nullptr && !e->isAlive()) delete e;
-		else {
-			e->integrate(t);
-		}
+		e->integrate(t);
 	}
 }
 

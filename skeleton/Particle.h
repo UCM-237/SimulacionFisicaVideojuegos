@@ -8,7 +8,8 @@ class Particle
 {
 public:
 	Particle(Vector3 pos = { 0.0, 0.0, 0.0 }, Vector3 Vel = { 0.0, 0.0, 0.0 },
-		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 1, double damp = 0.998, double ls = 1000);
+		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 1, double damp = 0.998, double ls = 1000, 
+		PxShape* s = CreateShape(PxSphereGeometry(5)), Vector4 c = { 0.19, 0.1, 0.2, 1.0 });
 	~Particle();
 
 	void integrate(double t);
@@ -31,7 +32,16 @@ public:
 	void setVelocity(const Vector3 v);
 	void setAcceleration(const Vector3 a);
 	void setDamping(const double d);
+	void setLifespan(const double ls);
+
+	inline PxTransform getPose() { return pose; };
+	inline Vector3 getVelocity() { return vel; };
 	
 	bool isAlive();
+
+	enum ParticleType { DEFAULT, BULLET, FIREWORK};
+
+	virtual Particle* clone() const;
+	inline void die() { DeregisterRenderItem(renderItem); };
 };
 

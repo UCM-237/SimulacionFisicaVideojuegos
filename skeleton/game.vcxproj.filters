@@ -7,31 +7,87 @@
     <ClCompile Include="Render\Render.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="RenderUtils.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="callbacks.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="Shooter.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Shooter.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="callbacks.cpp">
+      <Filter>Dunno lol</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Dunno lol</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderUtils.cpp">
+      <Filter>Dunno lol</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Dunno lol</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Firework.cpp">
+      <Filter>ParticleTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Fountain.cpp">
+      <Filter>ParticleTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core.hpp" />
     <ClInclude Include="Render\Camera.h">
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Render\Render.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="RenderUtils.hpp" />
-    <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="Shooter.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Particle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Shooter.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="callbacks.hpp">
+      <Filter>Dunno lol</Filter>
+    </ClInclude>
+    <ClInclude Include="core.hpp">
+      <Filter>Dunno lol</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderUtils.hpp">
+      <Filter>Dunno lol</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Dunno lol</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Firework.h">
+      <Filter>ParticleTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Fountain.h">
+      <Filter>ParticleTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
       <UniqueIdentifier>{d04b4f9f-5a69-465e-8070-25c6d0bcd3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{651d6ba9-a677-40b9-b9d8-7cb2d37c19d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dunno lol">
+      <UniqueIdentifier>{9282aa9b-b33a-4878-a52b-dd0e288fe541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleTypes">
+      <UniqueIdentifier>{5ad1b54f-88a8-472c-af47-c4485a0c5973}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

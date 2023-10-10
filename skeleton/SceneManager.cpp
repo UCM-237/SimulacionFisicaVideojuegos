@@ -79,7 +79,6 @@ void SceneManager::keyPress(unsigned char key, const PxTransform& camera)
 		{
 		case 'B':
 		{
-			cout << "aaa" << '\n';
 			shoot->shoot(Shooter::PISTOL);
 			break;
 		}
@@ -88,7 +87,7 @@ void SceneManager::keyPress(unsigned char key, const PxTransform& camera)
 			shoot->shoot(Shooter::LASER);
 			break;
 		}
-		case 'A':
+		case 'J':
 		{
 			shoot->shoot(Shooter::ARTILLERY);
 			break;

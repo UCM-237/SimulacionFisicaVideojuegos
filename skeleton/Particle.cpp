@@ -1,14 +1,14 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 pos, Vector3 Vel, Vector3 Acc, double m, double damp, double ls)
+Particle::Particle(Vector3 pos, Vector3 Vel, Vector3 Acc, double m, double damp, double ls, PxShape* s, Vector4 c)
 	: pose(PxTransform(pos.x, pos.y, pos.z)), vel(Vel), acc(Acc), mass(m), damping(damp), lifespan(ls), alive(true)
 {
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(5)), &pose, { 0.19, 0.1, 0.2, 1.0 });
+	renderItem = new RenderItem(s, &pose, c);
 }
 
 Particle::~Particle()
 {
-	DeregisterRenderItem(renderItem);
+	die();
 }
 
 void Particle::integrate(double t)
@@ -19,7 +19,7 @@ void Particle::integrate(double t)
 
 	lifespan -= t;
 	if (lifespan < 0) {
-		alive = false;
+		die();
 	}
 }
 
@@ -46,6 +46,11 @@ void Particle::setAcceleration(const Vector3 a)
 void Particle::setDamping(const double d)
 {
 	damping = d;
+}
+
+void Particle::setLifespan(const double ls)
+{
+	lifespan = ls;
 }
 
 bool Particle::isAlive()
