@@ -32,8 +32,6 @@
 *.app
 
 #Any directory
-bin/**
-common/**
 .vs/**
 .vs/game/FileContentIndex**
 skeleton/debug/**
