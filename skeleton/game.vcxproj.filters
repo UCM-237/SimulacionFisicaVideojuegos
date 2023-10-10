@@ -28,9 +28,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Dunno lol</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleGenerator.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
     <ClCompile Include="Firework.cpp">
       <Filter>ParticleTypes</Filter>
     </ClCompile>

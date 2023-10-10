@@ -8,8 +8,9 @@ class Particle
 {
 public:
 	Particle(Vector3 pos = { 0.0, 0.0, 0.0 }, Vector3 Vel = { 0.0, 0.0, 0.0 },
-		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 1, double damp = 0.998, double ls = 1000, 
+		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 1, double damp = 0.998, double ls = 5, 
 		PxShape* s = CreateShape(PxSphereGeometry(5)), Vector4 c = { 0.19, 0.1, 0.2, 1.0 });
+	Particle(Particle* p);
 	~Particle();
 
 	void integrate(double t);
@@ -19,6 +20,8 @@ private:
 	Vector3 acc;
 	PxTransform pose;
 	RenderItem* renderItem;
+	PxShape* shape;
+	Vector4 color;
 
 	double lifespan;
 	double damping;
@@ -36,6 +39,8 @@ public:
 
 	inline PxTransform getPose() { return pose; };
 	inline Vector3 getVelocity() { return vel; };
+	inline Vector3 getAcceleration() { return acc; };
+	inline double getLifespan() { return lifespan; };
 	
 	bool isAlive();
 

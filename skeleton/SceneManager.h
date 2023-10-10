@@ -6,6 +6,7 @@
 #include "Particle.h"
 #include "Shooter.h"
 #include "callbacks.hpp"
+#include "ParticleSystem.h"
 
 using namespace physx;
 using namespace std;
@@ -32,6 +33,7 @@ private:
 	int currScene;
 	vector<Particle*> particles;
 	Shooter* shoot;
+	ParticleSystem* pSys;
 	
 public:
 	SceneManager();

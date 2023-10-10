@@ -18,7 +18,14 @@ protected:
 	Vector3 _origin, _mean_velocity;
 	std::mt19937 _mt;
 	std::uniform_real_distribution<double> _u{ 0,1 };
+	float variancex = 5;
+	float variancey = 10;
+	float variancez = 5;
+	std::uniform_real_distribution<float> _velx{ -variancex,variancex };
+	std::uniform_real_distribution<float> _vely{ -variancey,variancey };
+	std::uniform_real_distribution<float> _velz{ -variancez,variancez };
 	std::string _name;
+
 
 public:
 	virtual std::list<Particle*> generateParticles() = 0;
@@ -44,6 +51,8 @@ public:
 	}
 	inline void setNParticles(int n_p) { _n_particles = n_p; }
 
-	virtual void integrate(double t) = 0;
+	inline void setXvariance(float f) { variancex = f; };
+	inline void setYvariance(float f) { variancey = f; };
+	inline void setZvariance(float f) { variancez = f; };
 };
 

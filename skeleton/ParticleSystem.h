@@ -1,14 +1,16 @@
 #pragma once
-#include  <list>
+#include <list>
 #include <vector>
 #include "Particle.h"
 #include "ParticleGenerator.h"
 #include "Firework.h"
+#include "Fountain.h"
 
 using namespace std;
 class ParticleSystem
 {
 	list<Particle*> _particles;
+	list<Particle*> _dumpster;
 	list<ParticleGenerator*> _pGenerator;
 	Vector3 _gravity;
 

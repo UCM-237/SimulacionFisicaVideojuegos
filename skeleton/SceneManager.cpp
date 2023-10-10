@@ -32,6 +32,7 @@ SceneManager::~SceneManager()
 	case 0:
 	{
 		delete shoot;
+		delete pSys;
 	}
 	default:
 		break;
@@ -60,6 +61,7 @@ void SceneManager::update(double t)
 	{
 	case 0: {
 		shoot->integrate(t);
+		pSys->update(t);
 	}
 	default:
 		break;
@@ -73,34 +75,34 @@ void SceneManager::keyPress(unsigned char key, const PxTransform& camera)
 {
 	switch (currScene)
 	{
-	case 0:
-	{
-		switch (toupper(key))
+		case 0:
 		{
-		case 'B':
-		{
-			shoot->shoot(Shooter::PISTOL);
-			break;
+			switch (toupper(key))
+			{
+			case 'B':
+			{
+				shoot->shoot(Shooter::PISTOL);
+				break;
+			}
+			case 'L':
+			{
+				shoot->shoot(Shooter::LASER);
+				break;
+			}
+			case 'J':
+			{
+				shoot->shoot(Shooter::ARTILLERY);
+				break;
+			}
+			case 'F':
+			{
+				shoot->shoot(Shooter::FIREBALL);
+				break;
+			}
+			}
+			default:
+				break;
 		}
-		case 'L':
-		{
-			shoot->shoot(Shooter::LASER);
-			break;
-		}
-		case 'J':
-		{
-			shoot->shoot(Shooter::ARTILLERY);
-			break;
-		}
-		case 'F':
-		{
-			shoot->shoot(Shooter::FIREBALL);
-			break;
-		}
-		}
-	default:
-		break;
-	}
 	}
 }
 
@@ -113,6 +115,7 @@ void SceneManager::changeScene(int scene)
 	case 0:
 	{
 		shoot = new Shooter();
+		pSys = new ParticleSystem();
 	}
 	default:
 		break;
