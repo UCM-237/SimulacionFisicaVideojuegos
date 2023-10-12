@@ -20,8 +20,8 @@ std::list<Particle*> Fountain::generateParticles()
 	std::list<Particle*> ret;
 	if (_u(_mt) < _generation_prob) {
 		for (int i = 0; i < _n_particles; ++i) {
-			ret.push_back(new Particle(_origin, { _velx(_mt), _vely(_mt), _velz(_mt) }, {0.0, 0.0, 0.0}, 1, 0.998, 5,
-				CreateShape(PxSphereGeometry(1)), { 0.0, 0.1, 0.8, 1.0 }));
+			ret.push_back(new Particle(_origin, { _velx(_mt) * _mean_velocity.x, _vely(_mt) * _mean_velocity.y, _velz(_mt) * _mean_velocity.z },
+				{0.0, 0.0, 0.0}, 1, 0.998, 5, CreateShape(PxSphereGeometry(1)), { 0.0, 0.1, 0.8, 1.0 }));
 		}
 	}
 	return ret;

@@ -18,12 +18,10 @@ protected:
 	Vector3 _origin, _mean_velocity;
 	std::mt19937 _mt;
 	std::uniform_real_distribution<double> _u{ 0,1 };
-	float variancex = 5;
-	float variancey = 10;
-	float variancez = 5;
-	std::uniform_real_distribution<float> _velx{ -variancex,variancex };
-	std::uniform_real_distribution<float> _vely{ -variancey,variancey };
-	std::uniform_real_distribution<float> _velz{ -variancez,variancez };
+
+	std::uniform_real_distribution<float> _velx{ -1,1 };
+	std::uniform_real_distribution<float> _vely{ -1,1 };
+	std::uniform_real_distribution<float> _velz{ -1,1 };
 	std::string _name;
 
 
@@ -50,9 +48,5 @@ public:
 		_model_particle->setPosition({ -1000.0f, -1000.0f, -1000.0f });
 	}
 	inline void setNParticles(int n_p) { _n_particles = n_p; }
-
-	inline void setXvariance(float f) { variancex = f; };
-	inline void setYvariance(float f) { variancey = f; };
-	inline void setZvariance(float f) { variancez = f; };
 };
 
