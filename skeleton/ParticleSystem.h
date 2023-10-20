@@ -4,7 +4,8 @@
 #include "Particle.h"
 #include "ParticleGenerator.h"
 #include "Firework.h"
-#include "Fountain.h"
+#include "UniformParticleGenerator.h"
+#include "GaussianParticleGenerator.h"
 
 using namespace std;
 class ParticleSystem

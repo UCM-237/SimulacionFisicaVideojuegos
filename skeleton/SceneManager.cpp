@@ -99,6 +99,11 @@ void SceneManager::keyPress(unsigned char key, const PxTransform& camera)
 				shoot->shoot(Shooter::FIREBALL);
 				break;
 			}
+
+			case 'P' :
+			{
+				pSys->generateFirework(0);
+			}
 			}
 			default:
 				break;

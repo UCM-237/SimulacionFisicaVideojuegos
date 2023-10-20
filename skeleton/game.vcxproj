@@ -255,7 +255,7 @@
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Firework.cpp" />
-    <ClCompile Include="Fountain.cpp" />
+    <ClCompile Include="GaussianParticleGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -264,12 +264,13 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shooter.cpp" />
+    <ClCompile Include="UniformParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Firework.h" />
-    <ClInclude Include="Fountain.h" />
+    <ClInclude Include="GaussianParticleGenerator.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleSystem.h" />
@@ -278,6 +279,7 @@
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shooter.h" />
+    <ClInclude Include="UniformParticleGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

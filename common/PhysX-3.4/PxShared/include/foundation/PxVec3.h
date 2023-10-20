@@ -216,6 +216,11 @@ class PxVec3
 		return PxVec3(x * f, y * f, z * f);
 	}
 
+	PX_CUDA_CALLABLE PX_FORCE_INLINE PxVec3 operator*(PxVec3 f) const
+	{
+		return PxVec3(x * f.x, y * f.y, z * f.z);
+	}
+
 	/**
 	\brief scalar division
 	*/

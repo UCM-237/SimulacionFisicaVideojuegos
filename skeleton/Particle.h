@@ -7,20 +7,19 @@ using namespace physx;
 class Particle
 {
 public:
-	Particle(Vector3 pos = { 0.0, 0.0, 0.0 }, Vector3 Vel = { 0.0, 0.0, 0.0 },
-		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 1, double damp = 0.998, double ls = 5, 
-		PxShape* s = CreateShape(PxSphereGeometry(5)), Vector4 c = { 0.19, 0.1, 0.2, 1.0 });
-	Particle(Particle* p);
+	Particle(bool v = true, Vector3 pos = { 0.0, 0.0, 0.0 }, Vector3 Vel = { 0.0, 0.0, 0.0 },
+		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 0.1, double damp = 0.998, double ls = 5, 
+		Vector4 c = { 0.19, 0.1, 0.2, 1.0 }, unsigned t = 0);
+	Particle(Particle* p, bool v = true);
 	~Particle();
 
 	void integrate(double t);
 
-private:
-	Vector3 vel;
-	Vector3 acc;
+protected:
+	Vector3 velocity;
+	Vector3 acceleration;
 	PxTransform pose;
 	RenderItem* renderItem;
-	PxShape* shape;
 	Vector4 color;
 
 	double lifespan;
@@ -28,6 +27,7 @@ private:
 	double mass;
 
 	bool alive;
+	unsigned _type;
 
 public:
 	void setMass(const double m);
@@ -36,17 +36,23 @@ public:
 	void setAcceleration(const Vector3 a);
 	void setDamping(const double d);
 	void setLifespan(const double ls);
+	inline void setColor(const Vector4 c) { color = c; };
 
 	inline PxTransform getPose() { return pose; };
-	inline Vector3 getVelocity() { return vel; };
-	inline Vector3 getAcceleration() { return acc; };
+	inline Vector3 getVelocity() { return velocity; };
+	inline Vector3 getAcceleration() { return acceleration; };
 	inline double getLifespan() { return lifespan; };
+	inline Vector4 getColor() { return color; };
+	inline double getMass() { return mass; };
+	inline unsigned getType() { return _type; };
+	double _ls;
 	
 	bool isAlive();
 
 	enum ParticleType { DEFAULT, BULLET, FIREWORK};
 
 	virtual Particle* clone() const;
-	inline void die() { DeregisterRenderItem(renderItem); };
+	inline void die() { if(renderItem != nullptr) DeregisterRenderItem(renderItem); };
+	inline void show() { if(renderItem == nullptr) renderItem = new RenderItem(CreateShape(PxSphereGeometry(mass)), &pose, color); }
 };
 
