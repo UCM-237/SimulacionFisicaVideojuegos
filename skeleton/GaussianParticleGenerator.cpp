@@ -16,8 +16,10 @@ std::list<Particle*> GaussianParticleGenerator::generateParticles()
 	if (_u(_mt) <= _generation_prob) {
 		for (int i = 0; i < _n_particles; ++i) {
 			Vector3 v = { _n(_mt), _n(_mt) , _n(_mt) };
-			ret.push_back(new Particle(true, _origin, v * _mean_velocity,
-				_model_particle->getAcceleration(), _model_particle->getMass(), 0.998, _model_particle->getLifespan(), _model_particle->getColor()));
+			_model_particle->setPosition(PxTransform(_origin));
+			_model_particle->setVelocity(v);
+			ret.push_back(_model_particle);
+			setParticle(_model_particle, false);
 		}
 	}
 	return ret;

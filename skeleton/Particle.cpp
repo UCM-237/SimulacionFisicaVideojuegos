@@ -1,7 +1,8 @@
 #include "Particle.h"
 
-Particle::Particle(bool v, Vector3 pos, Vector3 Vel, Vector3 Acc, double m, double damp, double ls, Vector4 c, unsigned t)
-	: pose(PxTransform(pos.x, pos.y, pos.z)), velocity(Vel), acceleration(Acc), mass(m), damping(damp), lifespan(ls), _ls(ls), alive(true), color(c), _type(t)
+Particle::Particle(bool v, Vector3 pos, Vector3 Vel, Vector3 Acc, double m, double damp, double ls, Vector4 c, unsigned t, int gen)
+	: pose(PxTransform(pos.x, pos.y, pos.z)), velocity(Vel), acceleration(Acc), mass(m), damping(damp), lifespan(ls), 
+	_ls(ls), alive(true), color(c), _type(t), _generation(gen)
 {
 	if (v)
 		renderItem = new RenderItem(CreateShape(PxSphereGeometry(m)), &pose, c);
@@ -9,7 +10,8 @@ Particle::Particle(bool v, Vector3 pos, Vector3 Vel, Vector3 Acc, double m, doub
 		renderItem = nullptr;
 }
 
-Particle::Particle(Particle* p, bool v) : pose(p->pose), velocity(p->velocity), acceleration(p->acceleration), mass(p->mass), damping(p->damping), lifespan(p->lifespan), _ls(p->lifespan), alive(true), _type(p->_type)
+Particle::Particle(Particle* p, bool v) : pose(p->pose), velocity(p->velocity), acceleration(p->acceleration), mass(p->mass), damping(p->damping), 
+	lifespan(p->lifespan), _ls(p->lifespan), alive(true), _type(p->_type), _generation(p->_generation)
 {
 	if (v)
 		renderItem = p->renderItem;
@@ -68,5 +70,5 @@ bool Particle::isAlive()
 Particle* Particle::clone() const
 {
 	//Vector3 pos, Vector3 Vel, Vector3 Acc, double m, double damp, double ls, PxShape* s, Vector4 c
-	return new Particle((renderItem != nullptr), pose.p, velocity, acceleration, mass, damping, lifespan, color, _type);
+	return new Particle((renderItem != nullptr), pose.p, velocity, acceleration, mass, damping, lifespan, color, _type, _generation);
 }

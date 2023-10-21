@@ -6,9 +6,11 @@ void ParticleSystem::onParticleDeath(Particle* p)
 	{
 	case Particle::FIREWORK: {
 		for (auto e : static_cast<Firework*>(p)->explode()) {
-			e->show();
-			e->setLifespan(e->_ls / 2);
-			_particles.push_back(e);
+			if (--*e->getGeneration() > -1) {
+				e->show();
+				e->setLifespan(e->getLifespan());
+				_particles.push_back(e);
+			}
 		}
 	}
 	default:
@@ -18,8 +20,6 @@ void ParticleSystem::onParticleDeath(Particle* p)
 
 ParticleSystem::ParticleSystem(const Vector3& g) : _gravity(g)
 {
-	//_pGenerator.push_back(new UniformParticleGenerator({ 0.0, 0.0, 0.0 }, {5.0, 20.0, 5.0}));
-	//_pGenerator.push_back(new GaussianParticleGenerator(new Particle(), {20.0, 0.0, 0.0}, {5.0, 20.0, 5.0}));
 	createFireworkSystem();
 }
 
@@ -47,8 +47,6 @@ void ParticleSystem::update(double t)
 		e->integrate(t);
 		e->_ls -= t;
 		if (e->_ls < 0) {
-			//_particles.remove(e);
-			//e->die();
 			onParticleDeath(e);
 			_dumpster.push_back(e);
 		}
@@ -70,20 +68,21 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 		temp->setPosition(PxTransform(0.0, 0.0, 0.0));
 		temp->setAcceleration(temp->getAcceleration() + Vector3{0.0, -2.0, 0.0});
 
+
 		std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator());
-		Particle* aux1 = new Particle(false);
+		Firework* aux1 = new Firework(false);
 		aux1->setColor({ 1.0, 0.0, 0.0, 1.0 });
 		aux1->setMass(0.5);
 		auxGen1->setParticle(aux1);
 
 		std::shared_ptr<ParticleGenerator> auxGen2(new GaussianParticleGenerator());
-		Particle* aux2 = new Particle(false);
+		Firework* aux2 = new Firework(false);
 		aux2->setColor({ 0.0, 1.0, 0.0, 1.0 });
 		aux2->setMass(0.5);
 		auxGen2->setParticle(aux2);
 
 		std::shared_ptr<ParticleGenerator> auxGen3(new GaussianParticleGenerator());
-		Particle* aux3 = new Particle(false);
+		Firework* aux3 = new Firework(false);
 		aux3->setColor({ 0.0, 0.0, 1.0, 1.0 });
 		aux3->setMass(0.5);
 		auxGen3->setParticle(aux3);
@@ -91,6 +90,7 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 		temp->addGenerator(auxGen1);
 		temp->addGenerator(auxGen2);
 		temp->addGenerator(auxGen3);
+
 		_particles.push_back(temp);
 		delete aux1;
 		delete aux2;

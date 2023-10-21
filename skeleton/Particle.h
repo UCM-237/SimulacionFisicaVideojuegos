@@ -9,7 +9,7 @@ class Particle
 public:
 	Particle(bool v = true, Vector3 pos = { 0.0, 0.0, 0.0 }, Vector3 Vel = { 0.0, 0.0, 0.0 },
 		Vector3 Acc = { 0.0, 0.0, 0.0 }, double m = 0.1, double damp = 0.998, double ls = 5, 
-		Vector4 c = { 0.19, 0.1, 0.2, 1.0 }, unsigned t = 0);
+		Vector4 c = { 0.19, 0.1, 0.2, 1.0 }, unsigned t = 0, int gen = 0);
 	Particle(Particle* p, bool v = true);
 	~Particle();
 
@@ -28,6 +28,7 @@ protected:
 
 	bool alive;
 	unsigned _type;
+	int _generation;
 
 public:
 	void setMass(const double m);
@@ -37,6 +38,7 @@ public:
 	void setDamping(const double d);
 	void setLifespan(const double ls);
 	inline void setColor(const Vector4 c) { color = c; };
+	inline int* getGeneration() { return &_generation; };
 
 	inline PxTransform getPose() { return pose; };
 	inline Vector3 getVelocity() { return velocity; };
@@ -52,7 +54,7 @@ public:
 	enum ParticleType { DEFAULT, BULLET, FIREWORK};
 
 	virtual Particle* clone() const;
-	inline void die() { if(renderItem != nullptr) DeregisterRenderItem(renderItem); };
+	inline void die() { if (renderItem != nullptr) renderItem->release(); };
 	inline void show() { if(renderItem == nullptr) renderItem = new RenderItem(CreateShape(PxSphereGeometry(mass)), &pose, color); }
 };
 

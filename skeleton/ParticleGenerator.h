@@ -11,7 +11,7 @@ class ParticleGenerator
 protected:
 	ParticleGenerator() {};
 
-	int _n_particles = 3; // Number of particles for each generateParticles call(TODO: add randomness ? ? )
+	int _n_particles = 1; // Number of particles for each generateParticles call(TODO: add randomness ? ? )
 	double _generation_prob = 1.0; // IF 1.0 --> always produces particles
 	Particle* _model_particle = nullptr; // Has the attributes of the particle that will be generated!(damping, lifetime, etc.)
 	Vector3 _origin, _mean_velocity;
@@ -21,7 +21,7 @@ protected:
 
 
 public:
-	~ParticleGenerator() {};
+	~ParticleGenerator() { delete _model_particle; };
 	virtual std::list<Particle*> generateParticles() = 0;
 	inline void setOrigin(const Vector3& p) { _origin = p; }
 	inline void setMeanVelocity(const Vector3& v) {
@@ -35,13 +35,12 @@ public:
 	}
 	//! @brief --> sets the particle, including its type, lifetime and mean positionsand velocities
 	inline void setParticle(Particle* p, bool modify_pos_vel = true) {
-		delete _model_particle;
+		if(_model_particle != p) delete _model_particle;
 		_model_particle = p->clone();
 		if (modify_pos_vel) {
 			_origin = p->getPose().p;
 			_mean_velocity = p->getVelocity();
 		}
-		_model_particle->setPosition({ -1000.0f, -1000.0f, -1000.0f });
 	}
 	inline void setNParticles(int n_p) { _n_particles = n_p; }
 
