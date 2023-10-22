@@ -2,13 +2,14 @@
 
 void ParticleSystem::onParticleDeath(Particle* p)
 {
-	switch (p->getType())
+	switch (*p->getType())
 	{
-	case Particle::FIREWORK: {
+	case FIREWORK: {
 		for (auto e : static_cast<Firework*>(p)->explode()) {
 			if (--*e->getGeneration() > -1) {
 				e->show();
-				e->setLifespan(e->getLifespan());
+				*e->getVelocity() * 10;
+				*e->getColor() = colorsInfo[e->randomColor()];
 				_particles.push_back(e);
 			}
 		}
@@ -39,7 +40,7 @@ void ParticleSystem::update(double t)
 {
 	for (auto g : _pGenerator) {
 		for (auto pg : g->generateParticles()) {
-			pg->setAcceleration(pg->getAcceleration() + _gravity);
+			*pg->getAcceleration() += _gravity;
 			_particles.push_back(pg);
 		}
 	}
@@ -64,27 +65,21 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	switch (firework_type)
 	{
 	case 0: {
-		Firework* temp = new Firework(true);
-		temp->setPosition(PxTransform(0.0, 0.0, 0.0));
-		temp->setAcceleration(temp->getAcceleration() + Vector3{0.0, -2.0, 0.0});
+		Firework* temp = new Firework(partType[FIREWORK]);
+		*temp->getPose() = PxTransform(0.0, 0.0, 0.0);
+		*temp->getAcceleration() += Vector3{0.0, -2.0, 0.0};
 
 
 		std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator());
-		Firework* aux1 = new Firework(false);
-		aux1->setColor({ 1.0, 0.0, 0.0, 1.0 });
-		aux1->setMass(0.5);
+		Firework* aux1 = new Firework(partType[FIREWORK]);
 		auxGen1->setParticle(aux1);
 
 		std::shared_ptr<ParticleGenerator> auxGen2(new GaussianParticleGenerator());
-		Firework* aux2 = new Firework(false);
-		aux2->setColor({ 0.0, 1.0, 0.0, 1.0 });
-		aux2->setMass(0.5);
+		Firework* aux2 = new Firework(partType[FIREWORK]);
 		auxGen2->setParticle(aux2);
 
 		std::shared_ptr<ParticleGenerator> auxGen3(new GaussianParticleGenerator());
-		Firework* aux3 = new Firework(false);
-		aux3->setColor({ 0.0, 0.0, 1.0, 1.0 });
-		aux3->setMass(0.5);
+		Firework* aux3 = new Firework(partType[FIREWORK]);
 		auxGen3->setParticle(aux3);
 
 		temp->addGenerator(auxGen1);

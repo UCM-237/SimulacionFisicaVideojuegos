@@ -31,15 +31,15 @@ public:
 		return _mean_velocity;
 	}
 	inline void setMeanDuration(double new_duration) {
-		_model_particle->setLifespan(new_duration);
+		*_model_particle->getLifespan() = new_duration;
 	}
 	//! @brief --> sets the particle, including its type, lifetime and mean positionsand velocities
 	inline void setParticle(Particle* p, bool modify_pos_vel = true) {
 		if(_model_particle != p) delete _model_particle;
 		_model_particle = p->clone();
 		if (modify_pos_vel) {
-			_origin = p->getPose().p;
-			_mean_velocity = p->getVelocity();
+			_origin = p->getPose()->p;
+			_mean_velocity = *p->getVelocity();
 		}
 	}
 	inline void setNParticles(int n_p) { _n_particles = n_p; }

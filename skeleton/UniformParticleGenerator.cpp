@@ -16,8 +16,8 @@ std::list<Particle*> UniformParticleGenerator::generateParticles()
 		for (int i = 0; i < _n_particles; ++i) {
 			Vector3 v = { _u(_mt), _u(_mt) , _u(_mt) };
 			Particle* temp = _model_particle->clone();
-			temp->setPosition(PxTransform(_origin));
-			temp->setVelocity(v * _mean_velocity);
+			*temp->getPose() = PxTransform(_origin);
+			*temp->getVelocity() = v * _mean_velocity;
 			ret.push_back(temp);
 		}
 	}
