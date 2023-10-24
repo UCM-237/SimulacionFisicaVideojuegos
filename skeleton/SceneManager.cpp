@@ -104,6 +104,10 @@ void SceneManager::keyPress(unsigned char key, const PxTransform& camera)
 			{
 				pSys->generateFirework(0);
 			}
+			case '0': 
+			{
+				pSys->addGenerator(0);
+			}
 			}
 			default:
 				break;

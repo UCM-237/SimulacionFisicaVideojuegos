@@ -7,9 +7,9 @@ void ParticleSystem::onParticleDeath(Particle* p)
 	case FIREWORK: {
 		for (auto e : static_cast<Firework*>(p)->explode()) {
 			if (--*e->getGeneration() > -1) {
-				e->show();
-				*e->getVelocity() * 10;
 				*e->getColor() = colorsInfo[e->randomColor()];
+				*e->getVelocity() *= 5;
+				e->show();
 				_particles.push_back(e);
 			}
 		}
@@ -33,7 +33,7 @@ ParticleSystem::~ParticleSystem()
 	for (auto pg : _pGenerator)
 		delete pg;
 
-	delete _firework_generator;
+	//delete _firework_generator;
 }
 
 void ParticleSystem::update(double t)
@@ -67,20 +67,23 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	case 0: {
 		Firework* temp = new Firework(partType[FIREWORK]);
 		*temp->getPose() = PxTransform(0.0, 0.0, 0.0);
-		*temp->getAcceleration() += Vector3{0.0, -2.0, 0.0};
+		*temp->getAcceleration() += Vector3{0.0, -9.8, 0.0};
 
 
 		std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator());
-		Firework* aux1 = new Firework(partType[FIREWORK]);
+		Firework* aux1 = new Firework(partType[CHERRY_BLOSSOM]);
 		auxGen1->setParticle(aux1);
+		auxGen1->setRandomLifespan(true);
 
 		std::shared_ptr<ParticleGenerator> auxGen2(new GaussianParticleGenerator());
 		Firework* aux2 = new Firework(partType[FIREWORK]);
 		auxGen2->setParticle(aux2);
+		auxGen2->setRandomLifespan(true);
 
 		std::shared_ptr<ParticleGenerator> auxGen3(new GaussianParticleGenerator());
-		Firework* aux3 = new Firework(partType[FIREWORK]);
+		Firework* aux3 = new Firework(partType[DEFAULT]);
 		auxGen3->setParticle(aux3);
+		auxGen3->setRandomLifespan(true);
 
 		temp->addGenerator(auxGen1);
 		temp->addGenerator(auxGen2);
@@ -99,14 +102,20 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 
 void ParticleSystem::createFireworkSystem()
 {
-	//_firework_generator = new GaussianParticleGenerator(new Firework(), {0.0, 0.0, 0.0}, {0.0, 25.0, 0.0}, 0.0);
-	_firework_generator = new UniformParticleGenerator();
-	//Firework* aux = new Firework();
-	//Particle* aux = new Particle();
-	//_firework_generator->setParticle(aux);
-	_firework_generator->setMeanVelocity({ 0.0, 100.0, 0.0 });
-	_firework_generator->setGenerationProb(0);
-	_firework_generator->setNParticles(1);
+}
 
-	//delete aux;
+void ParticleSystem::addGenerator(unsigned type) {
+	switch (type)
+	{
+	case 0: {
+		UniformParticleGenerator* mistGen = new UniformParticleGenerator();
+		Particle* mistParticle = new Particle(partType[MIST]);
+		mistGen->setParticle(mistParticle);
+		mistGen->setOffset(50.0f);
+		_pGenerator.push_back(mistGen);
+		break;
+	}
+	default:
+		break;
+	}
 }

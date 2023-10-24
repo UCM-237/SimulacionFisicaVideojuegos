@@ -15,15 +15,19 @@ protected:
 	double _generation_prob = 1.0; // IF 1.0 --> always produces particles
 	Particle* _model_particle = nullptr; // Has the attributes of the particle that will be generated!(damping, lifetime, etc.)
 	Vector3 _origin, _mean_velocity;
+	float offset = 0.0;
 	std::mt19937 _mt;
 	std::uniform_real_distribution<float> _u{ 0,1 };
 	std::string _name;
-
+	bool randomLifespan = false;
+	int randomLifespanLimits;
+	int minLifespan = 1;
 
 public:
-	~ParticleGenerator() { delete _model_particle; };
+	~ParticleGenerator() { if(_model_particle != nullptr) delete _model_particle; };
 	virtual std::list<Particle*> generateParticles() = 0;
 	inline void setOrigin(const Vector3& p) { _origin = p; }
+	inline void setOffset(const float f) { offset = f; }
 	inline void setMeanVelocity(const Vector3& v) {
 		_mean_velocity = v;
 	}
@@ -37,6 +41,7 @@ public:
 	inline void setParticle(Particle* p, bool modify_pos_vel = true) {
 		if(_model_particle != p) delete _model_particle;
 		_model_particle = p->clone();
+		randomLifespanLimits = _model_particle->_ls;
 		if (modify_pos_vel) {
 			_origin = p->getPose()->p;
 			_mean_velocity = *p->getVelocity();
@@ -47,5 +52,9 @@ public:
 	inline void setGenerationProb(double p) { _generation_prob = p; };
 
 	inline void setDistribution(std::uniform_real_distribution<float> d) { _u = d; };
+
+	inline void setRandomLifespan(bool b) { randomLifespan = b; };
+
+	inline void setRandomLifespanLimits(int ls) { randomLifespanLimits = ls; };
 };
 

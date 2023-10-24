@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <iostream>
 #include <vector>
 #include "Particle.h"
 #include "ParticleGenerator.h"
@@ -33,5 +34,7 @@ public:
 	// Gets a particle generator with name...
 	ParticleGenerator* getParticleGenerator(const string& n);
 	void createFireworkSystem();
+
+	void addGenerator(unsigned type);
 };
 

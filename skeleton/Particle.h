@@ -6,7 +6,7 @@ using namespace physx;
 
 namespace part {
 	const int nColors = 9;
-	const int nTypes = 9;
+	const int nTypes = 10;
 
 	enum _colors : int {
 		GRAY,
@@ -37,6 +37,7 @@ namespace part {
 		BULLET,
 		FIREWORK,
 		CHERRY_BLOSSOM,
+		MIST,
 		ICE,
 		WATER,
 		FIRE,
@@ -69,13 +70,17 @@ namespace part {
 		{ 0.0, 0.0, 0.0 }, 1, 0.998, 3,
 		colorsInfo[BLACK], 0, true, true, nullptr},
 
-		{FIREWORK, { 0.0, 0.0, 0.0 }, { 0.0, 25.0, 0.0 },
+		{FIREWORK, { 0.0, 0.0, 0.0 }, { 0.0, 55.0, 0.0 },
 		{ 0.0, 0.0, 0.0 }, 0.8, 0.998, 2,
-		colorsInfo[RED], 4, true, true, nullptr},
+		colorsInfo[WHITE], 3, true, true, nullptr},
 
 		{CHERRY_BLOSSOM, { 0.0, 0.0, 0.0 }, { 0.2, 0.2, -0.2 },
 		{ 0.0, 0.0, -0.01 }, 0.1, 0.998, 10,
 		colorsInfo[PINK], 0, true, true, nullptr},
+
+		{MIST, { 0.0, 0.0, 0.0 }, { 0.1, 0.1, -0.1 },
+		{ 0.1, 9.8, -0.01 }, 0.1, 0.998, 10,
+		colorsInfo[GRAY], 1, true, true, nullptr},
 
 		{ICE, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 },
 		{ 0.0, 0.0, 0.0 }, 0.1, 0.998, 10,

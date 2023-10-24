@@ -15,10 +15,14 @@ std::list<Particle*> UniformParticleGenerator::generateParticles()
 	if (_u(_mt) <= _generation_prob) {
 		for (int i = 0; i < _n_particles; ++i) {
 			Vector3 v = { _u(_mt), _u(_mt) , _u(_mt) };
-			Particle* temp = _model_particle->clone();
-			*temp->getPose() = PxTransform(_origin);
-			*temp->getVelocity() = v * _mean_velocity;
-			ret.push_back(temp);
+			*_model_particle->getPose() = PxTransform(_origin + Vector3((_u(_mt) * offset), (_u(_mt) * offset), (_u(_mt) * offset)));
+			*_model_particle->getVelocity() = v;
+			if (randomLifespan) {
+				*_model_particle->getLifespan() = (_u(_mt) * randomLifespanLimits) + minLifespan;
+			}
+			ret.push_back(_model_particle);
+
+			setParticle(_model_particle, false);
 		}
 	}
 	return ret;
