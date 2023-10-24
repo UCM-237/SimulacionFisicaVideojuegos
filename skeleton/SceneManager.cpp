@@ -79,34 +79,64 @@ void SceneManager::keyPress(unsigned char key, const PxTransform& camera)
 		{
 			switch (toupper(key))
 			{
-			case 'B':
+			//case 'P':
+			//{
+			//	shoot->shoot(Shooter::PISTOL);
+			//	break;
+			//}
+			//case 'L':
+			//{
+			//	shoot->shoot(Shooter::LASER);
+			//	break;
+			//}
+			//case 'J':
+			//{
+			//	shoot->shoot(Shooter::ARTILLERY);
+			//	break;
+			//}
+			//case 'B':
+			//{
+			//	shoot->shoot(Shooter::FIREBALL);
+			//	break;
+			//}
+			case 'M':
 			{
-				shoot->shoot(Shooter::PISTOL);
+				pSys->addGenerator(9);
 				break;
 			}
-			case 'L':
+			case 'F' :
 			{
-				shoot->shoot(Shooter::LASER);
+				pSys->generateFirework(0);
+				break;
+			}
+			case 'G':
+			{
+				pSys->generateFirework(1);
+				break;
+			}
+			case 'H':
+			{
+				pSys->generateFirework(2);
 				break;
 			}
 			case 'J':
-			{
-				shoot->shoot(Shooter::ARTILLERY);
+			{	pSys->generateFirework(3);
 				break;
-			}
-			case 'F':
-			{
-				shoot->shoot(Shooter::FIREBALL);
-				break;
-			}
-
-			case 'P' :
-			{
-				pSys->generateFirework(0);
 			}
 			case '0': 
 			{
 				pSys->addGenerator(0);
+				break;
+			}
+			case '1':
+			{
+				pSys->addGenerator(1);
+				break;
+			}
+			case '2':
+			{
+				pSys->addGenerator(2);
+				break;
 			}
 			}
 			default:

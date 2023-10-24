@@ -24,12 +24,14 @@ std::list<Particle*> Firework::explode()
 {
 	std::list<Particle*> ret;
 	for (auto e : _gens) {
-		e->setParticle(this, false);
+		//e->setParticle(this, false);
 		e->setOrigin(Vector3(pInfo.pose.p));
 		e->setMeanVelocity({20, 20, 20});
 		e->setMeanDuration(pInfo.lifespan);
 
 		for (auto g : e->generateParticles()) {
+			*g->getGeneration() = pInfo._generation - 1;
+			*g->getLifespan() = pInfo.lifespan;
 			ret.push_back(g);
 		}
 	}

@@ -5,31 +5,35 @@
 using namespace physx;
 
 namespace part {
-	const int nColors = 9;
+	const int nColors = 11;
 	const int nTypes = 10;
 
 	enum _colors : int {
 		GRAY,
 		RED,
+		ORANGE,
+		YELLOW,
 		GREEN,
+		LIGHT_BLUE,
 		BLUE,
-		PINK,
 		PURPLE,
+		PINK,
 		BLACK,
-		WHITE,
-		LIGHT_BLUE
+		WHITE
 	};
 
 	static Vector4 colorsInfo[nColors] = {
-		{0.2, 0.2, 0.2, 1.0},
-		{1.0, 0.0, 0.0, 1.0},
-		{0.0, 1.0, 0.0, 1.0},
-		{0.0, 0.0, 1.0, 1.0},
-		{1.0, 0.2, 0.1, 1.0},
-		{1.0, 0.2, 1.0, 1.0},
-		{0.0, 0.0, 0.0, 1.0},
-		{1.0, 1.0, 1.0, 1.0},
-		{0.0, 0.2, 1.0, 1.0}
+		{0.2, 0.2, 0.2, 1.0},//gray
+		{1.0, 0.0, 0.0, 1.0},//red
+		{1.0, 0.37, 0.12, 1.0},//orange
+		{1.0, 1.0, 0.0, 1.0},//yellow
+		{0.0, 0.0, 1.0, 1.0},//green
+		{0.65, 0.78, 0.9, 1.0},//light blue
+		{0.0, 1.0, 0.0, 1.0},//blue
+		{0.19, 0.1, 0.2, 1.0},//purple
+		{1.0, 0.82, 0.86, 1.0},//pink
+		{0.0, 0.0, 0.0, 1.0},//black
+		{1.0, 1.0, 1.0, 1.0}//white
 	};
 
 	enum _types : int {
@@ -64,19 +68,19 @@ namespace part {
 	static ParticleInfo partType[nTypes] = {
 		{DEFAULT, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 },
 		{ 0.0, 0.0, 0.0 }, 2, 0.998, 5,
-		colorsInfo[GRAY], 0, false, true, nullptr},
+		colorsInfo[GRAY], 1, false, true, nullptr},
 
 		{BULLET, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 },
 		{ 0.0, 0.0, 0.0 }, 1, 0.998, 3,
-		colorsInfo[BLACK], 0, true, true, nullptr},
+		colorsInfo[BLACK], 1, true, true, nullptr},
 
 		{FIREWORK, { 0.0, 0.0, 0.0 }, { 0.0, 55.0, 0.0 },
 		{ 0.0, 0.0, 0.0 }, 0.8, 0.998, 2,
 		colorsInfo[WHITE], 3, true, true, nullptr},
 
-		{CHERRY_BLOSSOM, { 0.0, 0.0, 0.0 }, { 0.2, 0.2, -0.2 },
-		{ 0.0, 0.0, -0.01 }, 0.1, 0.998, 10,
-		colorsInfo[PINK], 0, true, true, nullptr},
+		{CHERRY_BLOSSOM, { 0.0, 0.0, 0.0 }, { 0.2, 0.0, -0.2 },
+		{ 0.0, 9.8, -0.01 }, 0.1, 0.998, 10,
+		colorsInfo[PINK], 1, true, true, nullptr},
 
 		{MIST, { 0.0, 0.0, 0.0 }, { 0.1, 0.1, -0.1 },
 		{ 0.1, 9.8, -0.01 }, 0.1, 0.998, 10,
@@ -84,7 +88,11 @@ namespace part {
 
 		{ICE, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 },
 		{ 0.0, 0.0, 0.0 }, 0.1, 0.998, 10,
-		colorsInfo[LIGHT_BLUE], 0, true, true, nullptr},
+		colorsInfo[LIGHT_BLUE], 1, true, true, nullptr},
+
+		{WATER, { 0.0, 0.0, 0.0 }, { 1.0, 0.0, 1.0 },
+		{ 0.0, 0.0, 0.0 }, 0.1, 0.998, 10,
+		colorsInfo[BLUE], 1, true, true, nullptr},
 	};
 }
 
