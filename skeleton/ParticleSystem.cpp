@@ -226,6 +226,30 @@ void ParticleSystem::addGenerator(unsigned type) {
 		delete waterParticle;
 		break;
 	}
+	case 3: {
+		UniformParticleGenerator* uniGen = new UniformParticleGenerator();
+		Particle* auxParticle = new Particle(partType[ICE], true);
+		uniGen->setParticle(auxParticle);
+		uniGen->setMeanVelocity({ 3, 3, 3 });
+		uniGen->setOrigin({ 20.0f, 20.0f, 20.0f });
+
+		_pGenerator.push_back(uniGen);
+
+		delete auxParticle;
+		break;
+	}
+	case 4: {
+		GaussianParticleGenerator* gausGen = new GaussianParticleGenerator();
+		Particle* auxParticle2 = new Particle(partType[ICE]);
+		gausGen->setParticle(auxParticle2);
+		gausGen->setMeanVelocity({ 3, 3, 3 });
+		gausGen->setOrigin({ -20.0f, 20.0f, 20.0f });
+
+		_pGenerator.push_back(gausGen);
+
+		delete auxParticle2;
+		break;
+	}
 	case 9: { //hose
 		UniformParticleGenerator* hoseGen = new UniformParticleGenerator();
 		Particle* waterParticle = new Particle(partType[WATER]);

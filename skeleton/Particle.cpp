@@ -57,9 +57,9 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {
-	pInfo.pose.p += pInfo.velocity * t;
 	pInfo.velocity += pInfo.acceleration * t;
 	pInfo.velocity *= powf(pInfo.damping, t);
+	pInfo.pose.p += pInfo.velocity * t;
 }
 
 bool Particle::isAlive()
