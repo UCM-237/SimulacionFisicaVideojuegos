@@ -163,6 +163,10 @@ void SceneManager::changeScene(int scene)
 		shoot = new Shooter();
 		pSys = new ParticleSystem();
 	}
+	case 1: 
+	{
+		pSys = new ParticleSystem();
+	}
 	default:
 		break;
 	}

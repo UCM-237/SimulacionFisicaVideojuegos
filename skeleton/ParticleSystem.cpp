@@ -2,11 +2,11 @@
 
 void ParticleSystem::onParticleDeath(Particle* p)
 {
-	switch (*p->getType())
+	switch (p->getType())
 	{
 	case FIREWORK: {
 		for (auto e : static_cast<Firework*>(p)->explode()) {
-			if (*e->getGeneration() > -1) {
+			if (e->getGeneration() > -1) {
 				e->show();
 				_particles.push_back(e);
 			}
@@ -19,7 +19,7 @@ void ParticleSystem::onParticleDeath(Particle* p)
 
 ParticleSystem::ParticleSystem(const Vector3& g) : _gravity(g)
 {
-	createFireworkSystem();
+	forces.push_back(new GravityForceGenerator({ 0.0, -9.8, 0.0 }));
 }
 
 ParticleSystem::~ParticleSystem()
@@ -32,11 +32,15 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::update(double t)
 {
 	for (auto g : _pGenerator) {
+		auto partGens = pfr.getPartGens();
 		for (auto pg : g->generateParticles()) {
-			*pg->getAcceleration() += _gravity;
+			for (auto& e : partGens[g]) {
+				pfr.addRegistry(e, pg);
+			}
 			_particles.push_back(pg);
 		}
 	}
+	pfr.updateForces(t);
 	for (auto e : _particles) {
 		e->integrate(t);
 		e->_ls -= t;
@@ -59,22 +63,22 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	{
 	case 0: { //??
 		Firework* temp = new Firework(partType[FIREWORK]);
-		*temp->getPose() = PxTransform(0.0, 0.0, 0.0);
-		*temp->getAcceleration() += Vector3{0.0, -9.8, 0.0};
-		*temp->getGeneration() = 2;
+		temp->getPose() = PxTransform(0.0, 0.0, 0.0);
+		temp->getAcceleration() += Vector3{0.0, -9.8, 0.0};
+		temp->getGeneration() = 2;
 
 
 		std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator());
 		Firework* aux1 = new Firework(partType[CHERRY_BLOSSOM]);
-		*aux1->getMass() = 3;
+		aux1->getMass() = 3;
 		auxGen1->setParticle(aux1);
 		auxGen1->setRandomLifespan(true);
 		auxGen1->setNParticles(5);
 
 		std::shared_ptr<ParticleGenerator> auxGen2(new GaussianParticleGenerator());
 		Firework* aux2 = new Firework(partType[FIREWORK]);
-		*aux2->getColor() = colorsInfo[LIGHT_BLUE];
-		*aux2->getMass() = 3;
+		aux2->getColor() = colorsInfo[LIGHT_BLUE];
+		aux2->getMass() = 3;
 		aux2->addGenerator(auxGen1);
 		auxGen2->setParticle(aux2);
 		auxGen2->setRandomLifespan(true);
@@ -91,14 +95,14 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	}
 	case 1: { //RAINBOW
 		Firework* temp = new Firework(partType[FIREWORK]);
-		*temp->getGeneration() = 2;
-		*temp->getPose() = PxTransform(0.0, 0.0, 0.0);
-		*temp->getAcceleration() += Vector3{ 0.0, -9.8, 0.0 };
+		temp->getGeneration() = 2;
+		temp->getPose() = PxTransform(0.0, 0.0, 0.0);
+		temp->getAcceleration() += Vector3{ 0.0, -9.8, 0.0 };
 
 		for (int i = 0; i < 7; ++i) {
 			std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator());
 			Firework* aux1 = new Firework(partType[DEFAULT]);
-			*aux1->getColor() = colorsInfo[RED + i];
+			aux1->getColor() = colorsInfo[RED + i];
 			auxGen1->setParticle(aux1);
 			auxGen1->setNParticles(2);
 			auxGen1->setRandomLifespan(true);
@@ -111,13 +115,13 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	}
 	case 2: { //LAME 
 		Firework* temp = new Firework(partType[FIREWORK]);
-		*temp->getGeneration() = 4;
-		*temp->getPose() = PxTransform(0.0, 0.0, 0.0);
-		*temp->getAcceleration() += Vector3{ 0.0, -9.8, 0.0 };
+		temp->getGeneration() = 4;
+		temp->getPose() = PxTransform(0.0, 0.0, 0.0);
+		temp->getAcceleration() += Vector3{ 0.0, -9.8, 0.0 };
 
 		std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator());
 		Firework* aux1 = new Firework(partType[DEFAULT]);
-		*aux1->getColor() = colorsInfo[RED];
+		aux1->getColor() = colorsInfo[RED];
 		auxGen1->setParticle(aux1);
 		auxGen1->setNParticles(100);
 		auxGen1->setRandomLifespan(true);
@@ -129,9 +133,9 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	}
 	case 3: { //wtfd
 		Firework* temp = new Firework(partType[FIREWORK]);
-		*temp->getGeneration() = 4;
-		*temp->getPose() = PxTransform(0.0, 0.0, 0.0);
-		*temp->getAcceleration() += Vector3{ 0.0, -9.8, 0.0 };
+		temp->getGeneration() = 4;
+		temp->getPose() = PxTransform(0.0, 0.0, 0.0);
+		temp->getAcceleration() += Vector3{ 0.0, -9.8, 0.0 };
 
 		std::shared_ptr<ParticleGenerator> auxGen1(new GaussianParticleGenerator()); //genera aux1234
 		std::shared_ptr<ParticleGenerator> auxGen2(new GaussianParticleGenerator()); //genera aux234
@@ -139,11 +143,11 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 		std::shared_ptr<ParticleGenerator> auxGen4(new GaussianParticleGenerator()); //genera aux4
 
 		Firework* aux1 = new Firework(partType[FIREWORK]);
-		*aux1->getColor() = colorsInfo[RED];
+		aux1->getColor() = colorsInfo[RED];
 		Firework* aux2 = new Firework(partType[FIREWORK]);
-		*aux2->getColor() = colorsInfo[LIGHT_BLUE];
+		aux2->getColor() = colorsInfo[LIGHT_BLUE];
 		Firework* aux3 = new Firework(partType[FIREWORK]); //aux3 genera particulas aux4
-		*aux3->getColor() = colorsInfo[GREEN];
+		aux3->getColor() = colorsInfo[GREEN];
 		Firework* aux4 = new Firework(partType[DEFAULT]); //aux4 genera particulas normales
 
 		auxGen1->setNParticles(4);
@@ -155,7 +159,7 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 		auxGen3->setRandomLifespan(true);
 		auxGen4->setRandomLifespan(true);
 
-		*aux4->getColor() = colorsInfo[PINK];
+		aux4->getColor() = colorsInfo[PINK];
 		auxGen4->setParticle(aux4);
 
 		aux3->addGenerator(auxGen4);
@@ -186,10 +190,6 @@ void ParticleSystem::generateFirework(unsigned firework_type)
 	default:
 		break;
 	}
-}
-
-void ParticleSystem::createFireworkSystem()
-{
 }
 
 void ParticleSystem::addGenerator(unsigned type) {
@@ -232,6 +232,7 @@ void ParticleSystem::addGenerator(unsigned type) {
 		uniGen->setParticle(auxParticle);
 		uniGen->setMeanVelocity({ 3, 3, 3 });
 		uniGen->setOrigin({ 20.0f, 20.0f, 20.0f });
+		pfr.addPaticleGenerator(new GravityForceGenerator({ 0.0, -9.8, 0.0, }), uniGen);
 
 		_pGenerator.push_back(uniGen);
 
@@ -244,6 +245,7 @@ void ParticleSystem::addGenerator(unsigned type) {
 		gausGen->setParticle(auxParticle2);
 		gausGen->setMeanVelocity({ 3, 3, 3 });
 		gausGen->setOrigin({ -20.0f, 20.0f, 20.0f });
+		pfr.addPaticleGenerator(new GravityForceGenerator({ 0.0, -2, 0.0, }), gausGen);
 
 		_pGenerator.push_back(gausGen);
 

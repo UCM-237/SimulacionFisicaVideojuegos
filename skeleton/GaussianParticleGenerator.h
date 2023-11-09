@@ -11,7 +11,7 @@ public:
 	GaussianParticleGenerator(Vector3 origin = { 0.0, 0.0, 0.0 }, 
 		Vector3 mean_velocity = { 0.0, 0.0, 0.0 });
 	~GaussianParticleGenerator() {};
-	virtual std::list<Particle*> generateParticles();
 	virtual void setVars();
+	virtual Vector3 getRandomDist();
 };
 

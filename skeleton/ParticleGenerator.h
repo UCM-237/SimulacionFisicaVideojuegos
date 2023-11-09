@@ -26,7 +26,26 @@ protected:
 
 public:
 	~ParticleGenerator() { if(_model_particle != nullptr) delete _model_particle; };
-	virtual std::list<Particle*> generateParticles() = 0;
+
+	virtual std::list<Particle*> generateParticles() {
+		std::list<Particle*> ret;
+		if (_u(_mt) <= _generation_prob) {
+			for (int i = 0; i < _n_particles; ++i) {
+				Vector3 v = getRandomDist() * _mean_velocity;
+				_model_particle->getPose() = PxTransform(_origin + (getRandomDist() * offset));
+				_model_particle->getVelocity() = v;
+				if (randomLifespan) {
+					_model_particle->getLifespan() = (_u(_mt) * randomLifespanLimits) + minLifespan;
+				}
+
+				ret.push_back(_model_particle);
+
+				setParticle(_model_particle, false);
+			}
+		}
+		return ret;
+	};
+
 	virtual void setVars() = 0;
 	inline void setOrigin(const Vector3& p) { _origin = p; }
 	inline void setOffset(const Vector3& f) { offset = f; }
@@ -37,7 +56,7 @@ public:
 		return _mean_velocity;
 	}
 	inline void setMeanDuration(double new_duration) {
-		*_model_particle->getLifespan() = new_duration;
+		_model_particle->getLifespan() = new_duration;
 	}
 	//! @brief --> sets the particle, including its type, lifetime and mean positionsand velocities
 	inline void setParticle(Particle* p, bool modify_pos_vel = true) {
@@ -45,10 +64,12 @@ public:
 		_model_particle = p->clone();
 		randomLifespanLimits = _model_particle->_ls;
 		if (modify_pos_vel) {
-			_origin = p->getPose()->p;
-			_mean_velocity = *p->getVelocity();
+			_origin = p->getPose().p;
+			_mean_velocity = p->getVelocity();
 		}
 	}
+
+	virtual Vector3 getRandomDist() = 0;
 
 	inline void setNParticles(int n_p) { _n_particles = n_p; }
 

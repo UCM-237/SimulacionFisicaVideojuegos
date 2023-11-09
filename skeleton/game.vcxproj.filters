@@ -13,9 +13,6 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
-    <ClCompile Include="Shooter.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
     <ClCompile Include="callbacks.cpp">
       <Filter>Dunno lol</Filter>
     </ClCompile>
@@ -31,11 +28,26 @@
     <ClCompile Include="Firework.cpp">
       <Filter>ParticleTypes</Filter>
     </ClCompile>
-    <ClCompile Include="UniformParticleGenerator.cpp">
-      <Filter>Particles</Filter>
-    </ClCompile>
     <ClCompile Include="GaussianParticleGenerator.cpp">
-      <Filter>Particles</Filter>
+      <Filter>Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformParticleGenerator.cpp">
+      <Filter>Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="Shooter.cpp">
+      <Filter>Generators</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityForceGenerator.cpp">
+      <Filter>Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceRegistry.cpp">
+      <Filter>Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDragGenerator.cpp">
+      <Filter>Forces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +63,6 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Particles</Filter>
     </ClInclude>
-    <ClInclude Include="Shooter.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
     <ClInclude Include="callbacks.hpp">
       <Filter>Dunno lol</Filter>
     </ClInclude>
@@ -66,17 +75,32 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Dunno lol</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleGenerator.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
     <ClInclude Include="Firework.h">
       <Filter>ParticleTypes</Filter>
     </ClInclude>
-    <ClInclude Include="UniformParticleGenerator.h">
-      <Filter>Particles</Filter>
-    </ClInclude>
     <ClInclude Include="GaussianParticleGenerator.h">
-      <Filter>Particles</Filter>
+      <Filter>Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformParticleGenerator.h">
+      <Filter>Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="Shooter.h">
+      <Filter>Generators</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGenerator.h">
+      <Filter>Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDragGenerator.h">
+      <Filter>Forces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +115,12 @@
     </Filter>
     <Filter Include="ParticleTypes">
       <UniqueIdentifier>{5ad1b54f-88a8-472c-af47-c4485a0c5973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Forces">
+      <UniqueIdentifier>{a1587827-2c8e-4767-b31d-cf5026e0990a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generators">
+      <UniqueIdentifier>{11c572f1-6138-4e03-864f-0b65a297d964}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

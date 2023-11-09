@@ -44,8 +44,8 @@ void Shooter::shoot(currentShotType cst)
 		break;
 	}
 
-	*temp->getMass() = m; // almost no weight
-	*temp->getVelocity() = GetCamera()->getDir() * v;
-	*temp->getAcceleration() = a;
-	*temp->getPose() = PxTransform(GetCamera()->getEye());
+	temp->getMass() = m; // almost no weight
+	temp->getVelocity() = GetCamera()->getDir() * v;
+	temp->getAcceleration() = a;
+	temp->getPose() = PxTransform(GetCamera()->getEye());
 }

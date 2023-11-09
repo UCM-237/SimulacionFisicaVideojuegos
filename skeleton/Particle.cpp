@@ -15,6 +15,9 @@ Particle::Particle(bool v, Vector3 pos, Vector3 Vel, Vector3 Acc, double m, doub
 	pInfo._generation = gen;
 	pInfo.visible = v;
 
+	_inv_mass = 1 / m;
+	force = { 0.0,0.0,0.0 };
+
 	_ls = ls;
 
 	if (v)
@@ -27,6 +30,8 @@ Particle::Particle(int type, bool v)
 {
 	pInfo = partType[type];
 	_ls = pInfo.lifespan;
+	_inv_mass = 1 / pInfo.mass;
+	force = { 0.0,0.0,0.0 };
 
 	if (v)
 		pInfo.renderItem = new RenderItem(CreateShape(PxSphereGeometry(pInfo.mass)), &pInfo.pose, pInfo.color);
@@ -36,6 +41,8 @@ Particle::Particle(int type, bool v)
 
 Particle::Particle(Particle* p, bool v) : pInfo(p->pInfo), _ls(p->_ls)
 {
+	_inv_mass = 1 / pInfo.mass;
+	force = { 0.0,0.0,0.0 };
 	if (v)
 		pInfo.renderItem = new RenderItem(CreateShape(PxSphereGeometry(pInfo.mass)), &pInfo.pose, pInfo.color);
 	else
@@ -44,6 +51,8 @@ Particle::Particle(Particle* p, bool v) : pInfo(p->pInfo), _ls(p->_ls)
 
 Particle::Particle(ParticleInfo pI, bool v) : pInfo(pI), _ls(pI.lifespan)
 {
+	_inv_mass = 1 / pInfo.mass;
+	force = { 0.0,0.0,0.0 };
 	if (v)
 		pInfo.renderItem = new RenderItem(CreateShape(PxSphereGeometry(pInfo.mass)), &pInfo.pose, pInfo.color);
 	else
@@ -57,9 +66,13 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {
-	pInfo.velocity += pInfo.acceleration * t;
+	Vector3 resulting_accel = force * _inv_mass;
+	pInfo.velocity += resulting_accel * t;
+
 	pInfo.velocity *= powf(pInfo.damping, t);
 	pInfo.pose.p += pInfo.velocity * t;
+
+	clearForce();
 }
 
 bool Particle::isAlive()

@@ -83,7 +83,7 @@ namespace part {
 		colorsInfo[PINK], 1, true, true, nullptr},
 
 		{MIST, { 0.0, 0.0, 0.0 }, { 0.1, 0.1, -0.1 },
-		{ 0.1, 9.8, -0.01 }, 0.1, 0.998, 10,
+		{ 0.1, 9.8, -0.01 }, 1, 0.998, 10,
 		colorsInfo[GRAY], 1, true, true, nullptr},
 
 		{ICE, { 0.0, 0.0, 0.0 }, { 0.0, 0.0, 0.0 },
@@ -114,17 +114,20 @@ public:
 protected:
 
 	ParticleInfo pInfo;
+	Vector3 force;
+	double _inv_mass;
 
 public:
 
-	inline PxTransform* getPose() { return &pInfo.pose; };
-	inline Vector3* getVelocity() { return &pInfo.velocity; };
-	inline Vector3* getAcceleration() { return &pInfo.acceleration; };
-	inline double* getLifespan() { return &pInfo.lifespan; };
-	inline Vector4* getColor() { return &pInfo.color; };
-	inline double* getMass() { return &pInfo.mass; };
-	inline int* getType() { return &pInfo._type; };
-	inline int* getGeneration() { return &pInfo._generation; };
+	inline PxTransform& getPose() { return pInfo.pose; };
+	inline Vector3& getVelocity() { return pInfo.velocity; };
+	inline Vector3& getAcceleration() { return pInfo.acceleration; };
+	inline double& getLifespan() { return pInfo.lifespan; };
+	inline Vector4& getColor() { return pInfo.color; };
+	inline double& getMass() { return pInfo.mass; };
+	inline int& getType() { return pInfo._type; };
+	inline int& getGeneration() { return pInfo._generation; };
+	inline double& getInvMass() { return _inv_mass; };
 
 	double _ls;
 	
@@ -136,5 +139,8 @@ public:
 	inline void die() { if (pInfo.renderItem != nullptr) pInfo.renderItem->release(); };
 	inline void show() { if(pInfo.renderItem == nullptr) pInfo.renderItem = new RenderItem(CreateShape(PxSphereGeometry(pInfo.mass)), &pInfo.pose, pInfo.color); }
 	inline int randomColor() { return rand() % nColors ; }
+
+	void addForce(const Vector3& f) { force += f; }
+	inline void clearForce() { force *= 0.0; }
 };
 
