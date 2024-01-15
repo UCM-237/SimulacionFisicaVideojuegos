@@ -9,6 +9,8 @@
 #include "callbacks.hpp"
 
 #include <iostream>
+#include "Particle.h"
+#include "SceneManager.h"
 
 std::string display_text = "This is a test";
 
@@ -29,8 +31,11 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
-
-
+Particle* ball = NULL;
+SceneManager *manager=NULL;
+RenderItem* item = NULL;
+RenderItem* item2 = NULL;
+PxRigidDynamic* palo2 = NULL;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -54,6 +59,28 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	PxRigidStatic* palo1 = gPhysics->createRigidStatic(PxTransform({ 0, 0, 0 }));
+	PxShape* shape = CreateShape(PxBoxGeometry(1, 1, 1));
+	palo1->attachShape(*shape);
+	item = new RenderItem(shape, palo1, { 1,0.1,0.1,1 });
+	gScene->addActor(*palo1);
+
+	palo2 = gPhysics->createRigidDynamic(PxTransform({ 0.5,-10.5,0.5 }));
+	PxShape* shape2 = CreateShape(PxBoxGeometry(0.5, 10, 0.5));
+	palo2->attachShape(*shape2);
+	item2 = new RenderItem(shape2, palo2, { 0,0.1,0.8,1 });
+	gScene->addActor(*palo2);
+
+	PxRevoluteJoint* art = PxRevoluteJointCreate(*gPhysics, palo1, { 0,0,0 }, palo2, { 0.5,-10.5,0.5 });
+	//PxFixedJoint* art = PxFixedJointCreate(*gPhysics, palo1, { 0,0,0 }, palo2, { 0.5,-10.5,0.5 });
+	//PxPrismaticJoint* art = PxPrismaticJointCreate(*gPhysics, palo1, { 0,0,0 }, palo2, { 0.5,-10.5,0.5 });
+	PxReal f, t;
+	art->getBreakForce(f,t);
+	std::cout << f;
+	// My stuff
+	//manager = new SceneManager(1);
+	//ball = new Particle(PxVec3(0, 0, 0), PxVec3(5, 0, 0), PxVec3(0, 0, 0), 0.98, 10, 1);
 	}
 
 
@@ -65,7 +92,10 @@ void stepPhysics(bool interactive, double t)
 	PX_UNUSED(interactive);
 
 	gScene->simulate(t);
+	
 	gScene->fetchResults(true);
+	//ball->update(t);
+	//manager->update(t);
 }
 
 // Function to clean data
@@ -97,6 +127,8 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	//case ' ':	break;
 	case ' ':
 	{
+		palo2->addForce({ 10,0,0 });
+		//manager->addProjectile();
 		break;
 	}
 	default:
