@@ -35,7 +35,11 @@ Particle* ball = NULL;
 SceneManager *manager=NULL;
 RenderItem* item = NULL;
 RenderItem* item2 = NULL;
+RenderItem* item3 = NULL;
 PxRigidDynamic* palo2 = NULL;
+PxRigidDynamic* aCapsuleActor = NULL;
+PxShape* aCapsuleShape = NULL;
+
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -81,6 +85,7 @@ void initPhysics(bool interactive)
 	// My stuff
 	//manager = new SceneManager(1);
 	//ball = new Particle(PxVec3(0, 0, 0), PxVec3(5, 0, 0), PxVec3(0, 0, 0), 0.98, 10, 1);
+	
 	}
 
 
@@ -120,6 +125,7 @@ void cleanupPhysics(bool interactive)
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
+	Camera* cam=nullptr;
 
 	switch(toupper(key))
 	{
@@ -131,6 +137,27 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//manager->addProjectile();
 		break;
 	}
+	case 'P':
+	{
+		cam = GetCamera();
+		Vector3 v = cam->getDir();
+		std::cout << v.x;
+		std::cout << v.y;
+		std::cout << v.z;
+		aCapsuleActor = gPhysics->createRigidDynamic(PxTransform(cam->getEye()));
+		PxQuat endq = cam->getTransform().q;
+		PxQuat startq = aCapsuleActor->getGlobalPose().q;
+		
+		aCapsuleShape = CreateShape(PxCapsuleGeometry(2, 6));
+		PxQuat rotq = endq * startq.getConjugate();
+		PxTransform relativePose(startq*rotq);
+		aCapsuleShape->setLocalPose(relativePose);
+		item3 = new RenderItem(aCapsuleShape, aCapsuleActor, { 0.1,1,0.1,1 });
+		PxRigidBodyExt::updateMassAndInertia(*aCapsuleActor, 1.0);
+		aCapsuleActor->setLinearVelocity(100 * v);
+		gScene->addActor(*aCapsuleActor);
+	}
+
 	default:
 		break;
 	}
