@@ -1,0 +1,17 @@
+# Ignorar dependencias de PhysX y FreeGLUT
+packages/
+**/packages/
+skeleton/packages/
+skeleton/packages/*
+skeleton/packages/**
+
+# Ignorar temporales de Visual Studio
+.vs/
+*.user
+*.suo
+Debug/
+Release/
+x64/
+x86/
+bin/
+obj/
