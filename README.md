@@ -18,29 +18,6 @@
 
    ---
 
-  
-
-      ## 📋 Requisitos del Sistema y Software
-
-  
-
-  Antes de clonar e intentar compilar el proyecto, asegúrate de contar con el siguiente entorno configurado:
-
-  
-
-   *  * *Sistema Operativo: * * Windows 10 / 11 (64-bit).
-
-   *  * *Entorno de Desarrollo: * * Visual Studio 2022 (o posterior) con los siguientes workloads instalados:
-
-  & x20;  *  *Desarrollo para el escritorio con C++ *
-
-  & x20;  *  *MSVC v143 - SDK de Windows 10/11 *
-
-   *  * *Estándar C++: * * C++17 o C++20.
-
-   *  * *Git: * * Para el control de versiones de vuestras entregas.
-
-  
 
    ---
 
@@ -71,17 +48,22 @@ Para la realización y evaluación de las prácticas del curso, se seguirá estr
  
  ### Nomenclatura oficial de etiquetas:
  
-Entrega                                 Nombre del Tag  Comando de creación
+|Entrega                              |   Nombre del Tag  |Comando de creación |
+|:---|:---:|:---|
 
-Práctica 1 (Partículas e Integradores)  v1.0-P1         git tag -a v1.0-P1 -m "Entrega Practica 1"
+|Práctica 1 (Partículas e Integradores)  |v1.0-P1 |        git tag -a v1.0-P1 -m "Entrega Practica 1"|
 
-Práctica 2 (Muelles y Campos)           v2.0-P2         git tag -a v2.0-P2 -m "Entrega Practica 2"
+|Práctica 2 (Sistemas de partículas) |          v2.0-P2 |        git tag -a v2.0-P2 -m "Entrega Practica 2"|
 
-Práctica 3 (Colisiones Discretas)       v3.0-P3         git tag -a v3.0-P3 -m "Entrega Practica 3"
+|Práctica 3 (Fuerzas)|       |v3.0-P3 |        git tag -a v3.0-P3 -m "Entrega Practica 3"|
 
-Práctica 4 (NVIDIA PhysX Sólido Rígido) v4.0-P4         git tag -a v4.0-P4 -m "Entrega Practica 4"
+|Proyecto intermedio (Proyecto intermedio)| v3.1-PI    |     git tag -a v3.1-PI -m "Proyecto intermedio"|
 
-Proyecto Final                          v5.0-Final      git tag -a v5.0-Final -m "Entrega Proyecto Final"
+|Práctica 4 (Muelles y Flotación)| v4.0-P4    |     git tag -a v4.0-P4 -m "Entrega Practica 4"|
+
+|Práctica 5 (NVIDIA PhysX Sólido Rígido)| v5.0-P5    |     git tag -a v5.0-P5 -m "Entrega Practica 5"|
+
+|Proyecto Final                          |v6.0-Final  |    git tag -a v6.0-Final -m "Entrega Proyecto Final"|
 
 ### Pasos para publicar el Tag en GitHub:
 
@@ -103,33 +85,41 @@ git push origin v1.0-P1
 
 ### Requisitos de Software
 
-    - *Sistema Operativo:* Windows 10 / 11 (64-bit).
+- *Sistema Operativo:* Windows 10 / 11 (64-bit).
 
-    - *Entorno de Desarrollo:* Visual Studio 2019 o Visual Studio 2022 / 2025.
+- *Entorno de Desarrollo:* Visual Studio 2019 o Visual Studio 2022 / 2025.
 
-    - *Cargas de Trabajo en VS:* Desarrollo para el escritorio con C++ (incluyendo SDK de Windows 10/11 y MSVC v142/v143).
+- *Cargas de Trabajo en VS:* Desarrollo para el escritorio con C++ (incluyendo SDK de Windows 10/11 y MSVC v142/v143).
 
 ### Compilación y Ejecución
 
-    1. Abre la solución skeleton/game.sln con Visual Studio.
+1. Abre la solución skeleton/game.sln con Visual Studio.
 
-    2. Selecciona la configuración Debug o Release y la plataforma obligatoria x64 (PhysX requiere 64 bits).
+2. Selecciona la configuración Debug o Release y la plataforma obligatoria x64 (PhysX requiere 64 bits).
 
-    3. Las dependencias externas (FreeGLUT / PhysX SDK) se restauran automáticamente vía NuGet al compilar el proyecto por primera vez.
+3. Las dependencias externas (FreeGLUT / PhysX SDK) se restauran automáticamente vía NuGet al compilar el proyecto por primera vez.
 
-    4. Presiona F5 para compilar y lanzar la ventana de renderizado.
+4. Presiona F5 para compilar y lanzar la ventana de renderizado.
 
     
 ## 📂 Estructura del Repositorio
 
 SimulacionFisicaVideojuegos/
+
 ├── .gitignore          # Filtro de archivos temporales de VS y paquetes NuGet
+
 ├── README.md           # Guía e instrucciones del proyecto
+
 └── skeleton/           # Proyecto base en C++
+
     ├── game.sln        # Solución de Visual Studio
+
     ├── game.vcxproj    # Archivo de proyecto Visual C++
+
     ├── main.cpp        # Punto de entrada de la aplicación
+
     ├── Render/         # Modulo de renderizado base (Camera, Render)
+
     └── RenderUtils.*   # Utilidades gráficas y callbacks de teclado/ratón
 
 ## ⚠️ Resolución de Problemas Frecuentes
