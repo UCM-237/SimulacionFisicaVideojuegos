@@ -16,7 +16,7 @@
 
   
 
-    ---
+ ---
 
   ## 🛠️ Flujo de Trabajo y Metodología de Entrega
 
@@ -47,7 +47,7 @@ Para la realización y evaluación de las prácticas del curso, se seguirá estr
  
 |Entrega                              |   Nombre del Tag  |Comando de creación |
 | :--- | :---: | :--- |
-| Proyecto intermedio (Proyecto intermedio) | v1.0-Intermedio    |     git tag -a v1.0-Intermedio -m "Proyecto intermedio" |
+| Proyecto intermedio  | v1.0-Intermedio    |     git tag -a v1.0-Intermedio -m "Proyecto intermedio" |
 | Proyecto Final                          | v2.0-Final  |    git tag -a v2.0-Final -m "Entrega Proyecto Final" |
 
 ### Pasos para publicar el Tag en GitHub:
