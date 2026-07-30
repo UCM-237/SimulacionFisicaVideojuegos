@@ -1,4 +1,4 @@
-# \# Simulación Física en Videojuegos
+# Simulación Física en Videojuegos
 
 # 
 
