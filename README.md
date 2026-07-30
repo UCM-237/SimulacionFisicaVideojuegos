@@ -12,14 +12,11 @@
 
   
 
-  Bienvenido al repositorio oficial del  *skeleton * base para las prácticas de la asignatura  * *Simulación Física en Videojuegos * *. Este proyecto contiene la plantilla de inicio integrada con el motor de física  * *NVIDIA PhysX 4.1 * * y el sistema de renderizado para las prácticas del laboratorio.
+  Bienvenido al repositorio oficial del  **skeleton** base para las prácticas de la asignatura  **Simulación Física en Videojuegos**. Este proyecto contiene la plantilla de inicio integrada con el motor de física  **NVIDIA PhysX 4.1** y el sistema de renderizado para las prácticas del laboratorio.
 
   
 
-   ---
-
-
-   ---
+    ---
 
   ## 🛠️ Flujo de Trabajo y Metodología de Entrega
 
@@ -49,10 +46,8 @@ Para la realización y evaluación de las prácticas del curso, se seguirá estr
  ### Nomenclatura oficial de etiquetas:
  
 |Entrega                              |   Nombre del Tag  |Comando de creación |
-|:---|:---:|:---|
-
+| :--- | :---: | :--- |
 | Proyecto intermedio (Proyecto intermedio) | v1.0-Intermedio    |     git tag -a v1.0-Intermedio -m "Proyecto intermedio" |
-
 | Proyecto Final                          | v2.0-Final  |    git tag -a v2.0-Final -m "Entrega Proyecto Final" |
 
 ### Pasos para publicar el Tag en GitHub:
@@ -75,11 +70,11 @@ git push origin v1.0-P1
 
 ### Requisitos de Software
 
-- *Sistema Operativo:* Windows 10 / 11 (64-bit).
+- **Sistema Operativo:** Windows 10 / 11 (64-bit).
 
-- *Entorno de Desarrollo:* Visual Studio 2019 o Visual Studio 2022 / 2025.
+- **Entorno de Desarrollo:** Visual Studio 2019 o Visual Studio 2022 / 2025.
 
-- *Cargas de Trabajo en VS:* Desarrollo para el escritorio con C++ (incluyendo SDK de Windows 10/11 y MSVC v142/v143).
+- **Cargas de Trabajo en VS:** Desarrollo para el escritorio con C++ (incluyendo SDK de Windows 10/11 y MSVC v142/v143).
 
 ### Compilación y Ejecución
 
@@ -120,9 +115,9 @@ Asegúrate de no modificar la carpeta skeleton/packages/. El archivo .gitignore 
 
 ## 👨‍🏫 Profesorado y Tutorías
 
-*Profesores:* Raúl Fernández y Lía García
+**Profesores:** Raúl Fernández y Lía García
 
-*Departamento:* Arquitectura de Computadores y Automática.
+**Departamento:** Arquitectura de Computadores y Automática.
 
-*Ubicación:* Despacho 2.225, Segunda planta.  Facultad de Físicas.
+**Ubicación:** Despacho 2.225, Segunda planta.  Facultad de Físicas.
 
