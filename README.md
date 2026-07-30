@@ -51,19 +51,9 @@ Para la realización y evaluación de las prácticas del curso, se seguirá estr
 |Entrega                              |   Nombre del Tag  |Comando de creación |
 |:---|:---:|:---|
 
-|Práctica 1 (Partículas e Integradores)  |v1.0-P1 |        git tag -a v1.0-P1 -m "Entrega Practica 1"|
+| Proyecto intermedio (Proyecto intermedio) | v1.0-Intermedio    |     git tag -a v1.0-Intermedio -m "Proyecto intermedio" |
 
-|Práctica 2 (Sistemas de partículas) |          v2.0-P2 |        git tag -a v2.0-P2 -m "Entrega Practica 2"|
-
-|Práctica 3 (Fuerzas)|       |v3.0-P3 |        git tag -a v3.0-P3 -m "Entrega Practica 3"|
-
-|Proyecto intermedio (Proyecto intermedio)| v3.1-PI    |     git tag -a v3.1-PI -m "Proyecto intermedio"|
-
-|Práctica 4 (Muelles y Flotación)| v4.0-P4    |     git tag -a v4.0-P4 -m "Entrega Practica 4"|
-
-|Práctica 5 (NVIDIA PhysX Sólido Rígido)| v5.0-P5    |     git tag -a v5.0-P5 -m "Entrega Practica 5"|
-
-|Proyecto Final                          |v6.0-Final  |    git tag -a v6.0-Final -m "Entrega Proyecto Final"|
+| Proyecto Final                          | v2.0-Final  |    git tag -a v2.0-Final -m "Entrega Proyecto Final" |
 
 ### Pasos para publicar el Tag en GitHub:
 
@@ -104,23 +94,23 @@ git push origin v1.0-P1
     
 ## 📂 Estructura del Repositorio
 
-SimulacionFisicaVideojuegos/
+    SimulacionFisicaVideojuegos/
 
-├── .gitignore          # Filtro de archivos temporales de VS y paquetes NuGet
+    ├── .gitignore          # Filtro de archivos temporales de VS y paquetes NuGet
 
-├── README.md           # Guía e instrucciones del proyecto
+    ├── README.md           # Guía e instrucciones del proyecto
 
-└── skeleton/           # Proyecto base en C++
+    └── skeleton/           # Proyecto base en C++
 
-    ├── game.sln        # Solución de Visual Studio
+        ├── game.sln        # Solución de Visual Studio
 
-    ├── game.vcxproj    # Archivo de proyecto Visual C++
+        ├── game.vcxproj    # Archivo de proyecto Visual C++
 
-    ├── main.cpp        # Punto de entrada de la aplicación
+        ├── main.cpp        # Punto de entrada de la aplicación
 
-    ├── Render/         # Modulo de renderizado base (Camera, Render)
+        ├── Render/         # Modulo de renderizado base (Camera, Render)
 
-    └── RenderUtils.*   # Utilidades gráficas y callbacks de teclado/ratón
+        └── RenderUtils.*   # Utilidades gráficas y callbacks de teclado/ratón
 
 ## ⚠️ Resolución de Problemas Frecuentes
 
