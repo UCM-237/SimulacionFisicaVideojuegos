@@ -19,6 +19,9 @@
 #include "callbacks.hpp"
 
 #include <iostream>
+// Para las escenas del curso, se incluyen los headers de las prácticas y la escena vacía
+#include "SceneManager.h"
+#include "EmptyScene.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -94,16 +97,12 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	/*
-	if (gScene && gPvd->isConnected()) {
-		PxScenePvdClient* pvdClient = gScene->getScenePvdClient();
-		if (pvdClient) {
-			pvdClient->setScenePvdFlag(PxScenePvdFlag::eTRANSMIT_CONSTRAINTS, true);
-			pvdClient->setScenePvdFlag(PxScenePvdFlag::eTRANSMIT_CONTACTS, true);
-			pvdClient->setScenePvdFlag(PxScenePvdFlag::eTRANSMIT_SCENEQUERIES, true);
-		}
-	}
-	*/
+	// Registrar las prácticas/escenas del curso
+	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
+	
+	// Cargar la escena inicial
+	SceneManager::instance().changeScene("EscenaVacia");
+	
 }
 
 
@@ -133,6 +132,7 @@ void stepPhysics(bool interactive, double t)
 
 		gPhysicsTimeAccumulator -= gFixedTimestep;
 	}
+	SceneManager::instance().update(t);
 }
 
 // Function to clean data (for PhysX 5.0)
@@ -186,17 +186,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
-	switch(toupper(key))
-	{
-	//case 'B': break;
-	//case ' ':	break;
-	case ' ':
-	{
-		break;
-	}
-	default:
-		break;
-	}
+	SceneManager::instance().keyPress(key, camera);
 }
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)

@@ -23,10 +23,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DF91286C-A048-0858-C381-C4106C184C0B}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-<VcpkgConfiguration Condition="'$(Configuration)'=='Debug'">Debug</VcpkgConfiguration>
-	<VcpkgConfiguration Condition="'$(Configuration)'=='Release'">Release</VcpkgConfiguration>
+    <VcpkgConfiguration Condition="'$(Configuration)'=='Debug'">Debug</VcpkgConfiguration>
+    <VcpkgConfiguration Condition="'$(Configuration)'=='Release'">Release</VcpkgConfiguration>
   </PropertyGroup>
-	
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -267,13 +266,18 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="EmptyScene.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
