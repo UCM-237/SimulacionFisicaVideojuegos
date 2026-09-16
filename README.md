@@ -17,6 +17,25 @@
   
 
  ---
+ ## 🏗️ Arquitectura del Proyecto y Sistema de Escenas
+
+El proyecto utiliza una arquitectura modular basada en **escenas independientes** gestionadas por un patrón Singleton `SceneManager`.
+
+### 1. Clase Base `Scene`
+Todas las prácticas o entornos de prueba heredan de la interfaz `Scene` (`Scene.h`):
+* **`init()`**: Se ejecuta una sola vez al cargar la escena. Ideal para crear cuerpos físicos, geometrías y registrar objetos de renderizado.
+* **`update(double dt)`**: Bucle de actualización por frame (lógica, integración de partículas o fuerzas).
+* **`keyPress(unsigned char key, const physx::PxTransform& camera)`**: Gestión de eventos de teclado locales de la escena.
+* **`cleanup()`**: Se invoca al salir de la escena. **Es obligatorio deregistrar y liberar los `RenderItem` aquí para no dejar fugas de memoria**.
+
+### 2. Gestor Global `SceneManager`
+El `SceneManager` administra el registro y las transiciones diferidas entre escenas:
+* **Registro de escenas:** En `main.cpp`, registra tus prácticas usando `registerScene<TuEscena>("NombreEscena")`.
+* **Cambio de escena:** Puedes solicitar el cambio en cualquier momento mediante `SceneManager::instance().changeScene("NombreEscena")`.
+* **Navegación global:** Pulsar la tecla `'V'` vuelve a la escena por defecto `EmptyScene`.
+
+---
+
 
   ## 🛠️ Flujo de Trabajo y Metodología de Entrega
 
@@ -106,8 +125,19 @@ git push origin v1.0-P1
         ├── Render/         # Modulo de renderizado base (Camera, Render)
 
         └── RenderUtils.*   # Utilidades gráficas y callbacks de teclado/ratón
+        	
+        ├── Scene.h / .cpp  # Clase base abstracta para escenas
+    
+	    ├── SceneManager.*  # Gestor global (Singleton) de cambio de escenas
+    
+	    ├── EmptyScene.h    # Plantilla de escena inicial de ejemplo
+
 
 ## ⚠️ Resolución de Problemas Frecuentes
+
+
+Memoria y RenderItem: Cuando crees transformaciones en el heap con new physx::PxTransform(...), asegúrate de llamar a m_renderItem->release() y hacer delete transform en el cleanup() de tu escena para evitar datos corruptos al cambiar de práctica.
+
 
 Asegúrate de que la plataforma seleccionada en Visual Studio sea x64 y no x86. Si el problema persiste, limpia la solución (Compilar $\rightarrow$ Limpiar solución) y fuerza la restauración de paquetes NuGet (Herramientas $\rightarrow$ Gestor de paquetes NuGet $\rightarrow$ Restaurar).
 
