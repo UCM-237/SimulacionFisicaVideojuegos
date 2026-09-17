@@ -53,7 +53,7 @@ ContactReportCallback gContactReportCallback;
 double gPhysicsTimeAccumulator = 0.0;
 const double gFixedTimestep = 1.0 / 60.0;
 
-// Initialize physics engine (Updated for PhysX 5.0)
+
 void initPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
@@ -82,7 +82,6 @@ void initPhysics(bool interactive)
 		exit(1);
 	}
 
-	// Mandatory in PhysX 5.0 to initialize extensions 
 	PxInitExtensions(*gPhysics, gPvd);
 
 	gMaterial = gPhysics->createMaterial(0.5f, 0.5f, 0.6f);
@@ -108,8 +107,6 @@ void initPhysics(bool interactive)
 
 // Function to configure what happens in each step of physics
 // interactive: true if the game is rendering, false if it offline
-// t: time passed since last call in SECONDS (PhysX 5.0 uses seconds as time unit)
-
 void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
@@ -135,7 +132,7 @@ void stepPhysics(bool interactive, double t)
 	SceneManager::instance().update(t);
 }
 
-// Function to clean data (for PhysX 5.0)
+
 // Add custom code to the begining of the function
 void cleanupPhysics(bool interactive)
 {
