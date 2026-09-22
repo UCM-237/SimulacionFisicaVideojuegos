@@ -385,7 +385,7 @@ void finishRender()
 void drawText(const std::string& text, int x, int y)
 {
 	glMatrixMode(GL_PROJECTION);
-	double* matrix = new double[16];
+	double matrix[16];
 	glGetDoublev(GL_PROJECTION_MATRIX, matrix);
 	glLoadIdentity();
 	glOrtho(0, 512, 0, 512, -5, 5);
